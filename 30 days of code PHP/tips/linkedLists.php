@@ -49,7 +49,12 @@
                 
             }else{
                 $this->current = $this->head;
-                while($this->current !== null){
+                if($this->current == data){
+                    $this->current = $this->current->next;
+                    return;
+                }
+                
+                while($this->current->next !== null){
                     if($this->next->data == $data){
                         $this->current->next = $this->current->next->next;
                         return;

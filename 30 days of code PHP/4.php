@@ -5,7 +5,7 @@
         
         public function __construct($initialAge){
               // Add some more code to run some checks on initialAge
-            if($initialAge < 0){
+            if(false === is_numeric($initialAge) || $initialAge < 0){
                 print("Age is not valid, setting age to 0.\n");
                 $this->age = 0;
             }else{
