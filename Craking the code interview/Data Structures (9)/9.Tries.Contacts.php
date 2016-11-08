@@ -1,176 +1,84 @@
 <?php
 
+Class Trie{
+		private $arr = [] ;
+		private $template = [
+			'_isWord' => false,
+			'_childWords' => 1
+		];
 
-//Trie class
-class Trie
-{
-    
-    public $root;
-    
-	function __construct()
-	{
-		$this->root = new TrieNode('');
-	}
-	
-	function addWord($word)
-	{
-		$wordArray = str_split($word);
-		$this->root->addSuffix($wordArray);
-	}
-	
-	function hasWord($word)
-	{
-		$wordArray = str_split($word);
-		return $this->root->hasSuffix($wordArray);
-	}
-	
-	function printStructure()
-	{
-		$this->root->printStructure(0);
-	}
-	
-	function printWords()
-	{
-		$this->root->printWords('');
-	}
-}
+		public function add($word){
+            $word = preg_replace('/\s+/', '', $word);
+			$arr = str_split($word);
+			$n = count($arr);
 
-class TrieNode
-{
-	function __construct($value){ 
-        $this->value = $value; 
-    }
-	
-	function addSuffix($suffixArray)
-	{
-		if(!empty($suffixArray))
-		{
-			$firstChar = $suffixArray[0];
-			$remnant = array_slice($suffixArray, 1);
-			
-			$childNode = $this->getChild($firstChar);
-			if(false === $childNode)
-			{
-				$childNode = $this->addChild($firstChar);
-			}
-			$childNode->addSuffix($remnant);
-		}
-		else
-		{
-			$this->finishesWord = true;
-		}
-	}
-	
-	function hasSuffix($suffixArray)
-	{
-		if(!empty($suffixArray))
-		{
-			$firstChar = $suffixArray[0];
-			
-			$childNode = $this->getChild($firstChar);
-			if(false == $childNode)
-			{
-				return false;
-			}	
-			else
-			{
-				$remnant = array_slice($suffixArray, 1);
-				return $childNode->hasSuffix($remnant);
-			}
-		}
-		else 
-		{
-			return true;
-		}
-	}		
-	
-	function getChild($childString)
-	{
-		if(is_array($this->children))
-		{
-			foreach ($this->children as $child)
-			{
-				if($child->value === $childString)
-				{
-					return $child;
+			$node = &$this->arr;
+
+			for($i = 0; $i < $n ; $i++){
+				if(!isset($node[$arr[$i]])){
+					$node[$arr[$i]] = $this->template;
+				}else{
+					$node[$arr[$i]]['_childWords']++;
+					if($i == $n -1 && isset($node[$arr[$i]])){
+						$node[$arr[$i]]['_isWord'] = true;
+					}
 				}
+				$node = &$node[$arr[$i]];
 			}
 		}
-		return false;
-	}
-	
-	function addChild($childString)
-	{
-		if(is_array($this->children))
-		{
-			foreach($this->children as $child)
-			{
-				if($child->value === $childString)
-				{
-					return $child;
-				}
+
+		public function find($word, $i = 0 , $array = false){
+            if($word != ''){
+                			$word = preg_replace('/\s+/', '', $word);
+			if(!$array){
+				$array = $this->arr;
 			}
-		}
-		
-		$child = new TrieNode($childString);
-		$this->children[] = $child;
-		
-		return $child;
-	}
-	
-	function printStructure($level)
-	{
-		for($i=0; $i<$level; $i++)
-		{
-			echo ".";
-		}
-		echo $this->value.'<br/>';
-		if(is_array($this->children))
-		{
-			foreach($this->children as $child)
-			{
-				$child->printStructure($level + 1);
-			}
-		}
-	}
-	
-	function printWords($prefix)
-	{
-		if($this->finishesWord)
-		{
-			echo $prefix.$this->value.'<br/>';
-		}
-		
-		if(is_array($this->children))
-		{
-			foreach($this->children as $child)
-			{
-				$child->printWords($prefix.$this->value);
-			}
-		}
-	}
-}
+
+			$letter = substr($word, $i, 1);
+    		if (isset($array[$letter])) {
+        		if ($i == strlen($word) - 1) {
+            		return $array[$letter];
+        		} else if ($i < strlen($word)) {
+            		return $this->find($word, $i + 1, $array[$letter]);
+        		}
+
+    		}
+    		return false;
+            }
 
 
-// Define operations && trie
-$operations = array(
-    'add',
-    'find'
-);
+
+
+		}
+
+		public function countChild($word){
+			$_word = $this->find($word);
+			if($this->find($word)){
+                if(isset($_word['_childWords'])){
+                    return intval($_word['_childWords']);
+                }else{
+                    return 0;
+                }
+            }
+
+			return 0;
+
+		}
+
+		public function getTrie(){
+			return var_export($this->arr);
+		}
+	}
 
 $trie = new Trie();
 
-
-// Handle Stream
 $handle = fopen ("php://stdin","r");
 fscanf($handle,"%d",$n);
 for($a0 = 0; $a0 < $n; $a0++){
     fscanf($handle,"%s %s",$op,$contact);
-    
-    ($op == $operations[0])? 
-        $trie->addWord($contact):
-        $trie->printWords($contact);
+    (trim($op) == 'add')?
+        $trie->add(trim($contact)):
+        print($trie->countChild(trim($contact))."\n");
 }
 
-
-
+?>

@@ -1,0 +1,31 @@
+SOFTWARE:
+
+Git Bash 		: 
+Jetbrains PHPStorm 	:
+Notepad++ 		:
+Xampp 			:
+NodeJS			:
+Composer		:
+Oracle VM Box		:
+Vagrant			:
+Linux Kali		:
+Phalcon			:
+Visual Paradigm		:
+Filezilla		:
+Sourcetree		:
+Sublime			:
+MySql Workbench (needs to be before XAMPP ):
+
+DEPENDENCIES:
+PHPUnit			:
+Testem			:
+Gulp			:
+Grunt			:
+Less			:
+TypeScrypt		:
+Sass			:
+Yo			:
+
+
+Pluralsight 	- login:itpeople
+		- password:itplearn

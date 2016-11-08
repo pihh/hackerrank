@@ -207,6 +207,14 @@ Class Node(){
 
 Class Trie(){
     
+    public $hashMap = array();
+    
+    public function setNode($char ,$arr = $this->hashMap){
+        if(!isset($arr[$char])){
+            $arr[$char] = new Node();
+        }
+        return $arr[$char];
+    }
 }
 
 

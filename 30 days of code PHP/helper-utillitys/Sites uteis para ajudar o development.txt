@@ -1,0 +1,2 @@
+spaceipsum.com // dummy text com frases sobre o espaço sempre fica mais querido lol
+http://www.unixtimestamp.com/ //Eu pessoalmente uso timestamps para loggar erros, isto porque os timestamps são unicos e porque assim se n quizer os users n sabem o que se passou em concreto

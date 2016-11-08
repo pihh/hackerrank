@@ -1,0 +1,38 @@
+    /**
+    |---------------------------
+    | Register New User
+    | @desc: Processo de registo de novo user
+    | @author: Pihh - https://github.com/pihh
+     *
+    | @todo: articular com o perfil de user
+    |---------------------------
+     */
+
+
+    /**
+    | 
+    | @desc: 
+     */
+
+    /**
+    | 
+    | @desc: 
+    | @author: Pihh - https://github.com/pihh
+    | @requires: 
+    | @todo: 
+     */
+
+
+/**
+ | Created by: Filipe Mota de Sá - pihh.rocks@gmail.com
+ | Date: 26/03/2016
+ | Time: 22:07
+ | Requirements:
+ |  .env file
+ */
+
+http://www.unixtimestamp.com/
+
+http://subtlepatterns.com/
+
+https://www.diffchecker.com/
