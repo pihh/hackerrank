@@ -23,6 +23,7 @@ while ($low <= $high) { // While the high pointer is greater or equal to the low
 
 $arr = [1,4,5,3,2];
 sort($arr);
+
 $searchFor = 4;
 
 var_dump(binarySearch($arr,$searchFor));

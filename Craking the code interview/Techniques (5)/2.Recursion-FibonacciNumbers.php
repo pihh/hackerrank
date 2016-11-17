@@ -21,20 +21,20 @@ $handle = fopen ("php://stdin","r");
 
     //Recursive fibonacci
     function fibonacciRecursive($n){
-        if($n==1){
+        if($n == 0){
             return 0;
         }
-        if($n==2){
-            return 1;
+        if ($n == 1 || $n == 2)
+        {
+          return 1;
         }
-        else{
-            $sum = fibonacciRecursive($n-1)+fibonacciRecursive($n-2);
-            return $sum;
+        else
+        {
+          return fibonacciRecursive( $n - 1)+fibonacciRecursive( $n - 2 );
         }
-
     }
     $fib = fibonacciRecursive(29);
-    //echo $fib;  
+    //echo $fib;
 
     //Linear fibonacci
     function fibonacci($n) {
